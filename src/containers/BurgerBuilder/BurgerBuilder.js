@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Auxiliary from "../../hoc/Auxiliary";
 import Burger from "../../components/Burger/Burger";
+import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 
 // stateful Component, because we add some state's
 class BurgerBuilder extends Component {
@@ -25,7 +26,7 @@ class BurgerBuilder extends Component {
         return (
             <Auxiliary>
                 <Burger ingredients={this.state.ingredients} />
-                <div>Bild Controls</div>
+                <BuildControls />
             </Auxiliary>
         );
     }

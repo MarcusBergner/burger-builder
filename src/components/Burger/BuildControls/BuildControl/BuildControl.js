@@ -2,8 +2,8 @@ import React from "react";
 import classes from "./BuildControl.css";
 
 
-//  <div>{}</div> --> allows output dynamically!
 
+//  <div>{}</div> --> allows output dynamically!
 const buildControl = (props) => (
     <div className={classes.BuildControl}>
         <div className={classes.label}>{props.label}</div>
