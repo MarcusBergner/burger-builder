@@ -27,7 +27,8 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4,
-        purchasable: false
+        purchasable: false,
+        purchasing: false
     }
     updatePuchaseState(ingredients) {
 
@@ -71,7 +72,14 @@ class BurgerBuilder extends Component {
         this.updatePuchaseState(updatedIngredients);
 
     }
+    purchaseHandler = () => {
+        this.setState({ purchasing: true });
+    }
 
+    purchasaeCancelHandler = () => {
+        // to make sure "this" inside of this method refers to the class and not to something else!
+        this.setState({ purchasing: false });
+    }
     render() {
         const disableInfo = {
             ...this.state.ingredients
@@ -82,7 +90,7 @@ class BurgerBuilder extends Component {
         }
         return (
             <Auxiliary>
-                <Modal>
+                <Modal show={this.state.purchasing} modalClosed={this.purchasaeCancelHandler}>
                     <OrderSummary ingredients={this.state.ingredients} />
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
@@ -91,6 +99,7 @@ class BurgerBuilder extends Component {
                     ingredientRemoved={this.removeIngredientHandler}
                     disabled={disableInfo}
                     purchasable={this.state.purchasable}
+                    ordered={this.purchaseHandler}
                     price={this.state.totalPrice} />
             </Auxiliary>
         );
