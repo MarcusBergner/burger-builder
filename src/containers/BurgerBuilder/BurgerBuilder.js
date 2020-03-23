@@ -80,6 +80,9 @@ class BurgerBuilder extends Component {
         // to make sure "this" inside of this method refers to the class and not to something else!
         this.setState({ purchasing: false });
     }
+    purchaseContinueHandler = () => {
+        alert("You continue!");
+    }
     render() {
         const disableInfo = {
             ...this.state.ingredients
@@ -91,7 +94,10 @@ class BurgerBuilder extends Component {
         return (
             <Auxiliary>
                 <Modal show={this.state.purchasing} modalClosed={this.purchasaeCancelHandler}>
-                    <OrderSummary ingredients={this.state.ingredients} />
+                    <OrderSummary
+                        ingredients={this.state.ingredients}
+                        purchaseCancelled={this.purchasaeCancelHandler}
+                        purchaseContinued={this.purchaseContinueHandler} />
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls

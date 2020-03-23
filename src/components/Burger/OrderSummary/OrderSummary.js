@@ -1,6 +1,6 @@
 import React from 'react';
 import Auxiliary from "../../../hoc/Auxiliary";
-
+import Button from '../../UI/Button/Button';
 
 // with <span></span> aloows too use some inline style 
 // {{}} --> JavaScript-Object: the outrt pair is for marking a dynamic entry and inner pair are the JavaScribt object
@@ -23,8 +23,8 @@ const orderSummary = (props) => {
                 {ingredientSummary}
             </ul>
             <p>Continue to Checkout?</p>
-            <button>CANCEL</button>
-            <button>CONTINUE</button>
+            <Button btnType="Danger" clicked={props.purchaseCancelled}>CANCEL</Button>
+            <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
         </Auxiliary >
     );
 };
