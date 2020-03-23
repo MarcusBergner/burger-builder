@@ -6,7 +6,9 @@ const sideDrawer = (props) => {
     // ... to conditionally attach different css classes to make sure we play some animation
     return (
         <div className={classes.SideDrawer}>
-            <Logo />
+            <div className={classes.Logo}>
+                <Logo />
+            </div>
             <nav>
                 <NavigationItems />
             </nav>
