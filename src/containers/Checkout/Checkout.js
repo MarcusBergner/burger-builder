@@ -10,6 +10,20 @@ class Checkout extends Component {
     }
   };
   /**
+   * Extract the query Parameters
+   * @returns (Extracting Query-parameters)
+   * @yields query.entries() = loop through the different queryParams
+   */
+  componentDidMount = () => {
+    const query = new URLSearchParams(this.props.location.search);
+    const ingredients = {};
+    for (let param of query.entries()) {
+      // ["salad", "1"]
+      ingredients[param[0]] = +param[1];
+    }
+    this.setState({ ingredients: ingredients });
+  };
+  /**
    * goes back to the last page.
    * @returns (go to previews page)
    */
