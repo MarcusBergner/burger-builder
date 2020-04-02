@@ -94,36 +94,9 @@ class BurgerBuilder extends Component {
    * this is the Place, where i set loading to true,
    *  and where i then place my order,
    *  and send it so the web!
+   *  passed as a querry parameter.
    */
   purchaseContinueHandler = () => {
-    // alert("You continue!");
-    //     this.setState({ loading: true });
-    //     // not a setup in real-world() --> prices should definitely calculate on the server-site, for no manipualte !
-    //     const order = {
-    //       ingredients: this.state.ingredients,
-    //       price: this.state.totalPrice,
-    //       customer: {
-    //         name: "Marcus",
-    //         adress: {
-    //           street: "Am Hamburger Bahnhof 4",
-    //           zipCode: "10557",
-    //           country: "Germany"
-    //         },
-    //         email: "test@test.com"
-    //       },
-    //       deliveryMethod: "fastest"
-    //     };
-    //     // send the data to my backend, ".json" -> only a firebase spezial thing for correct work!
-    //     axios
-    //       .post("/orders.json", order)
-    //       .then(response => {
-    //         // console.log(response);
-    //         this.setState({ loading: false, purchasing: false });
-    //       })
-    //       .catch(error => {
-    //         // console.log(error);
-    //         this.setState({ loading: false, purchasing: false });
-    //       });
     const queryParams = [];
 
     for (let i in this.state.ingredients) {
@@ -133,6 +106,7 @@ class BurgerBuilder extends Component {
           encodeURIComponent(this.state.ingredients[i])
       );
     }
+    queryParams.push("price=" + this.state.totalPrice);
     const querySring = queryParams.join("&");
     this.props.history.push({
       pathname: "/checkout",
