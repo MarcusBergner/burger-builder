@@ -74,15 +74,23 @@ class ContactData extends Component {
    * Executed on a Button-Click as a reference.
    * @preventDefault   to prevent the default case,
    *  which i dont't want. (send a request)
+   * @formElementIdentifier return the value that the user entered.
    */
   orderHandler = (event) => {
     event.preventDefault();
     // alert("You continue!");
     this.setState({ loading: true });
+    const formData = {};
+    for (let formElementIdentifier in this.state.orderForm) {
+      formData[formElementIdentifier] = this.state.orderForm[
+        formElementIdentifier
+      ].value;
+    }
     // not a setup in real-world() --> prices should definitely calculate on the server-site, for no manipualte !
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
+      orderData: formData,
     };
     // send the data to my backend, ".json" -> only a firebase spezial thing for correct work!
     axios
@@ -123,7 +131,7 @@ class ContactData extends Component {
       });
     }
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
