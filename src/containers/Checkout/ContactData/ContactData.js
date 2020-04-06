@@ -91,6 +91,7 @@ class ContactData extends Component {
             { value: "cheapest", diplayValue: "Cheapest" },
           ],
         },
+        //TODO fix empty String later, if we submit our Form later. this will become an issue actually submit an empty value in case we never switch!
         value: "",
         validation: {},
         valid: true,
