@@ -7,14 +7,19 @@ import classes from "./Input.css";
  * @param {elementConfig} props Types of InputElements, which define in ContactData.
  * @elementConfig should receive the element config set up for a given input in our ContactData.state!
  * @textarea is a self-closing element in react.
+ * @join(" ") to concatenate all my string classes into one long string where the classes are separated.
  */
 const input = (props) => {
   let inputElement = null;
+  const inputClasses = [classes.InputElement];
+  inputClasses.push(classes.Invalid);
+  if (props.invalid && props.shouldValidate) {
+  }
   switch (props.elementType) {
     case "input":
       inputElement = (
         <input
-          className={classes.InputElement}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -25,7 +30,7 @@ const input = (props) => {
     case "textarea":
       inputElement = (
         <textarea
-          className={classes.InputElement}
+          className={inputClasses}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -35,7 +40,7 @@ const input = (props) => {
     case "select":
       inputElement = (
         <select
-          className={classes.InputElement}
+          className={inputClasses}
           value={props.value}
           onChange={props.changed}
         >
@@ -51,7 +56,7 @@ const input = (props) => {
     default:
       inputElement = (
         <input
-          className={classes.InputElement}
+          className={inputClasses}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
