@@ -3,22 +3,42 @@ import classes from "./Input.css";
 
 /**
  * It should basically a wrapper component for normal inputs.
- * @param {inputElement} props Types of InputElements
+ * A Custom input Component.
+ * @param {elementConfig} props Types of InputElements, which define in ContactData.
+ * @elementConfig should receive the element config set up for a given input in our ContactData.state!
  * @textarea is a self-closing element in react.
  */
 const input = props => {
   let inputElement = null;
-  switch (props.inputtype) {
+  switch (props.elementType) {
     case "input":
-      inputElement = <input className={classes.InputElement} {...props} />;
+      inputElement = (
+        <input
+          className={classes.InputElement}
+          {...props.elementConfig}
+          value={props.value}
+        />
+      );
       break;
 
     case "textarea":
-      inputElement = <textarea className={classes.InputElement} />;
+      inputElement = (
+        <textarea
+          className={classes.InputElement}
+          {...props.elementConfig}
+          value={props.value}
+        />
+      );
       break;
 
     default:
-      inputElement = <input className={classes.InputElement} />;
+      inputElement = (
+        <input
+          className={classes.InputElement}
+          {...props.elementConfig}
+          value={props.value}
+        />
+      );
   }
 
   return (

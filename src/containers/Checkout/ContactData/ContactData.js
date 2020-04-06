@@ -8,6 +8,10 @@ import Input from "../../../components/UI/Input/Input";
 
 // import { withRouter } from "react-router-dom";
 
+/**
+ * @elementConfig these are the default html attribute names,
+ *  important that you use them inside elementConfig the default names!
+ */
 class ContactData extends Component {
   state = {
     orderForm: {
@@ -98,12 +102,7 @@ class ContactData extends Component {
   render() {
     let form = (
       <form>
-        <Input
-          inputtype="input"
-          type="text"
-          name="name"
-          placeholder="Your name"
-        />
+        <Input elementType="..." elementConfig="..." value=".." />
         <Input
           inputtype="input"
           type="email"
