@@ -8,63 +8,66 @@ import Input from "../../../components/UI/Input/Input";
 
 // import { withRouter } from "react-router-dom";
 
+/**
+ * @elementConfig these are the default html attribute names,
+ *  important that you use them inside elementConfig the default names!
+ */
 class ContactData extends Component {
+  // TODO create a helper method for initialize it
   state = {
     orderForm: {
-      // TODO create a helper method for initialize it
-
       name: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Your Name"
+          placeholder: "Your Name",
         },
-        value: ""
+        value: "",
       },
       street: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "street"
+          placeholder: "street",
         },
-        value: ""
+        value: "",
       },
       zipCode: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "ZIP Code"
+          placeholder: "ZIP Code",
         },
-        value: ""
+        value: "",
       },
       country: {
         elementType: "input",
         elementConfig: {
           type: "text",
-          placeholder: "Country"
+          placeholder: "Country",
         },
-        value: ""
+        value: "",
       },
       email: {
         elementType: "input",
         elementConfig: {
           type: "email",
-          placeholder: "Your E-mail"
+          placeholder: "Your E-mail",
         },
-        value: ""
+        value: "",
       },
       deliveryMethod: {
         elementType: "select",
         elementConfig: {
           options: [
             { value: "fastest", diplayValue: "Fastest" },
-            { value: "cheapest", diplayValue: "Cheapest" }
-          ]
+            { value: "cheapest", diplayValue: "Cheapest" },
+          ],
         },
-        value: ""
-      }
+        value: "",
+      },
     },
-    loading: false
+    loading: false,
   };
   /**
    * Mehtode to be use on Events.
@@ -72,56 +75,65 @@ class ContactData extends Component {
    * @preventDefault   to prevent the default case,
    *  which i dont't want. (send a request)
    */
-  orderHandler = event => {
+  orderHandler = (event) => {
     event.preventDefault();
     // alert("You continue!");
     this.setState({ loading: true });
     // not a setup in real-world() --> prices should definitely calculate on the server-site, for no manipualte !
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price
+      price: this.props.price,
     };
     // send the data to my backend, ".json" -> only a firebase spezial thing for correct work!
     axios
       .post("/orders.json", order)
-      .then(response => {
+      .then((response) => {
         // console.log(response);
         this.setState({ loading: false });
         this.props.history.push("/");
       })
-      .catch(error => {
+      .catch((error) => {
         // console.log(error);
         this.setState({ loading: false });
       });
     // console.log(this.props.ingredients);
   };
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedOrderForm = {
+      ...this.state.orderForm,
+    };
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier],
+    };
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
+  /**
+   * @for(...) return the property-names of that orderForm Object.
+   * the keys in state-object are the identifiers of the input-objects
+   */
   render() {
+    const formElementsArray = [];
+    for (let key in this.state.orderForm) {
+      formElementsArray.push({
+        id: key,
+        config: this.state.orderForm[key],
+      });
+    }
     let form = (
       <form>
-        <Input
-          inputtype="input"
-          type="text"
-          name="name"
-          placeholder="Your name"
-        />
-        <Input
-          inputtype="input"
-          type="email"
-          name="email"
-          placeholder="Your email"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="street"
-          placeholder="Your street"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="postalCode"
-          placeholder="Your postalCode"
-        />
+        {formElementsArray.map((formElement) => (
+          <Input
+            key={formElement.id}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
+          />
+        ))}
+
         <Button btnType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>
