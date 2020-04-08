@@ -101,7 +101,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
   - [`npm run build` fails to minify](#npm-run-build-fails-to-minify)
   - [Moment.js locales are missing](#momentjs-locales-are-missing)
 - [Alternatives to Ejecting](#alternatives-to-ejecting)
-- [Something Missing?](#something-missing) -[React-Redux](#react-redux)
+- [Something Missing?](#something-missing)
+- [React-Redux](#react-redux)
 
 ## Updating to New Releases
 
