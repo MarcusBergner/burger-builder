@@ -2,30 +2,27 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "../Checkout/ContactData/ContactData";
+import { connect } from "react-redux";
 class Checkout extends Component {
-  state = {
-    ingredients: [],
-    price: 0
-  };
   /**
    * Extract the query Parameters, bevor
    * @returns (Extracting Query-parameters)
    * @yields query.entries() = loop through the different queryParams
    */
-  componentDidMount = () => {
-    const query = new URLSearchParams(this.props.location.search);
-    const ingredients = {};
-    let price = 0;
-    for (let param of query.entries()) {
-      // ["salad", "1"]
-      if (param[0] === "price") {
-        price = param[1];
-      } else {
-        ingredients[param[0]] = +param[1];
-      }
-    }
-    this.setState({ ingredients: ingredients, totalPrice: price });
-  };
+  // componentDidMount = () => {
+  //   const query = new URLSearchParams(this.props.location.search);
+  //   const ingredients = {};
+  //   let price = 0;
+  //   for (let param of query.entries()) {
+  //     // ["salad", "1"]
+  //     if (param[0] === "price") {
+  //       price = param[1];
+  //     } else {
+  //       ingredients[param[0]] = +param[1];
+  //     }
+  //   }
+  //   this.setState({ ingredients: ingredients, totalPrice: price });
+  // };
   /**
    * goes back to the last page.
    * @returns (go to previews page)
@@ -46,22 +43,36 @@ class Checkout extends Component {
     return (
       <div>
         <CheckoutSummary
-          ingredients={this.state.ingredients}
+          ingredients={this.props.ings}
           checkoutCancelled={this.checkoutCancelledHandler}
           checkoutContinued={this.checkoutContinuedHandler}
         />
         <Route
           path={this.props.match.path + "/contact-data"}
-          render={props => (
-            <ContactData
-              ingredients={this.state.ingredients}
-              price={this.state.totalPrice}
-              {...props}
-            />
-          )}
+          component={ContactData}
+          // this render-trick-method for loading contact data
+          // render={(props) => (
+          //   <ContactData
+          //     ingredients={this.props.ings}
+          //     price={this.state.totalPrice}
+          //     {...props}
+          //   />
+          // )}
         />
       </div>
     );
   }
 }
-export default Checkout;
+/**
+ * @mapStateToProps has a function which gets the state.
+ *  And in the end returns a javascript object where we map, our state stored in redux store
+ *  to the props of this container.
+ * @state.ingredients Reference: must same name as in reducer.js initialState.ingredients !
+ *
+ */
+const mapStateToProps = (state) => {
+  return {
+    ings: state.ingredients,
+  };
+};
+export default connect(mapStateToProps)(Checkout);
