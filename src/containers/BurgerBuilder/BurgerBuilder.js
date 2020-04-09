@@ -11,7 +11,7 @@ const INGREDIENT_PRICES = {
   salad: 0.5,
   cheese: 0.4,
   meat: 1.3,
-  bacon: 0.7
+  bacon: 0.7,
 };
 // stateful Component, because we add some state's
 class BurgerBuilder extends Component {
@@ -27,22 +27,22 @@ class BurgerBuilder extends Component {
     purchasable: false,
     purchasing: false,
     loading: false,
-    error: false
+    error: false,
   };
   componentDidMount() {
     console.log(this.props);
-    axios
-      .get("https://react-my-burger-6c728.firebaseio.com/ingredients.json")
-      .then(response => {
-        this.setState({ ingredients: response.data });
-      })
-      .catch(error => {
-        this.setState({ error: true });
-      });
+    // axios
+    //   .get("https://react-my-burger-6c728.firebaseio.com/ingredients.json")
+    //   .then(response => {
+    //     this.setState({ ingredients: response.data });
+    //   })
+    //   .catch(error => {
+    //     this.setState({ error: true });
+    //   });
   }
   updatePuchaseState(ingredients) {
     const sum = Object.keys(ingredients)
-      .map(igKey => {
+      .map((igKey) => {
         return ingredients[igKey];
       })
       .reduce((sum, el) => {
@@ -50,11 +50,11 @@ class BurgerBuilder extends Component {
       }, 0);
     this.setState({ purchasable: sum > 0 });
   }
-  addIngredientHandler = type => {
+  addIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
     const updatedIngredients = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
     updatedIngredients[type] = updatedCount;
     const priceAddition = INGREDIENT_PRICES[type];
@@ -65,14 +65,14 @@ class BurgerBuilder extends Component {
     this.updatePuchaseState(updatedIngredients);
   };
   // reduce ingredient count -1 and deduct the price
-  removeIngredientHandler = type => {
+  removeIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     if (oldCount <= 0) {
       return;
     }
     const updatedCount = oldCount - 1;
     const updatedIngredients = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
     updatedIngredients[type] = updatedCount;
     const priceDeduction = INGREDIENT_PRICES[type];
@@ -110,12 +110,12 @@ class BurgerBuilder extends Component {
     const querySring = queryParams.join("&");
     this.props.history.push({
       pathname: "/checkout",
-      search: "?" + querySring
+      search: "?" + querySring,
     });
   };
   render() {
     const disableInfo = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
     // create for/in loop -->through all the keys in disableInfo
     for (let key in disableInfo) {
