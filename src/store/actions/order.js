@@ -54,3 +54,9 @@ export const purchaseBurger = (orderData) => {
     // console.log(this.props.ingredients);
   };
 };
+
+export const purchaseInit = () => {
+  return {
+    type: actionTypes.PURCHASE_INIT,
+  };
+};
