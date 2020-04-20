@@ -10,11 +10,14 @@ import reducer from "./store/reducer";
 
 /**
  * connecting our store which is created by redux with our
- * react-app!
+ * react-app & the React-devtools!
  * Also set the store property on the provider component and
  * pass our created store.
  */
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 /**
  * For activate Routing in app, use BrowserRouter and wrapped!
  * Spezial Import if use Provider.react-redux & BrowserRouter.react-router,
