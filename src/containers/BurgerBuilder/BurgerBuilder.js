@@ -8,7 +8,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import axios from "../../axios-orders";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions";
+import * as actionTypes from "../../store/actions/actionTypes";
 
 // stateful Component, because we add some state's
 class BurgerBuilder extends Component {

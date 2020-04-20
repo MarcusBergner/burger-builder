@@ -6,7 +6,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import reducer from "./store/reducer";
+import reducer from "./store/reducers/burgerBuilder";
 
 /**
  * connecting our store which is created by redux with our
