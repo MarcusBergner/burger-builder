@@ -25,12 +25,20 @@ export const purchaseBurgerFail = (error) => {
   };
 };
 
+export const purchaseBurgerStart = () => {
+  return {
+    type: actionTypes.PURCHASE_BURGER_START,
+  };
+};
 /**
  * This is a Asynchronous action creator.
  * This action we dispatched from the container once we click that order button.
  */
-export const purchaseBurgerStart = (orderData) => {
+export const purchaseBurger = (orderData) => {
   return (dispatch) => {
+    // the action returned by purchaseBurgerStart is dispatched to the store!
+    dispatch(purchaseBurgerStart());
+
     // send the data to my backend, ".json" -> only a firebase spezial thing for correct work!
     axios
       .post("/orders.json", orderData)

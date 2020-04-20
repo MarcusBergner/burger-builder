@@ -100,7 +100,6 @@ class ContactData extends Component {
       },
     },
     formIsValid: false,
-    loading: false,
   };
   /**
    * Mehtode to be use on Events.
@@ -203,7 +202,7 @@ class ContactData extends Component {
         </Button>
       </form>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
     return (
@@ -218,11 +217,20 @@ const mapStateToProps = (state) => {
   return {
     ings: state.ingredients,
     price: state.totalPrice,
+    loading: state.loading,
   };
 };
+/**
+ * connected our action
+ * @param {*} dispatch
+ */
 const mapDispatchToProps = (dispatch) => {
-  onOrderBurger: (orderData) =>
-    dispatch(actions.purchaseBurgerStart(orderData));
+  return {
+    onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData)),
+  };
 };
 
-export default connect(mapStateToProps)(withErrorHandler(ContactData, axios));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(ContactData, axios));
