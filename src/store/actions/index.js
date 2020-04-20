@@ -2,7 +2,7 @@ export {
   addIngedient,
   removeIngedient,
   initIngredients,
-} from //   fetchIngredientsFailed,
-//   setIngredients,
-"./burgerBuilder";
+  fetchIngredientsFailed,
+  setIngredients,
+} from "./burgerBuilder";
 export {} from "./order";
