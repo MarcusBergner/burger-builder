@@ -5,8 +5,14 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import reducer from "./store/reducer";
+import { createStore, applyMiddleware, compose } from "redux";
+import burgerBuilderReducer from "./store/reducers/burgerBuilder";
+import thunk from "redux-thunk";
+
+/**
+ * @compose allows us to compose our own set of enchancers and middleware
+ */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 /**
  * connecting our store which is created by redux with our
@@ -15,8 +21,8 @@ import reducer from "./store/reducer";
  * pass our created store.
  */
 const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  burgerBuilderReducer,
+  composeEnhancers(applyMiddleware(thunk))
 );
 /**
  * For activate Routing in app, use BrowserRouter and wrapped!
