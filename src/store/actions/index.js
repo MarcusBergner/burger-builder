@@ -1,2 +1,8 @@
-export { addIngedient, removeIngedient } from "./burgerBuilder";
+export {
+  addIngedient,
+  removeIngedient,
+  initIngredients,
+  fetchIngredientsFailed,
+  setIngredients,
+} from "./burgerBuilder";
 export {} from "./order";

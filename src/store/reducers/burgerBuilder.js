@@ -16,6 +16,12 @@ const INGREDIENT_PRICES = {
  * @case actionTypes.ADD_INGEDRIENT:
  * returning a new version of the state
  * with the updated ingredients.
+ * @case actionTypes.SET_INGREDIENTS:
+ *  this is executed whenever we got ingredients from the server,
+ *  to initialize our ingredients.
+ * note: we could also execute this, set this with any set of ingrediens,
+ *  with any javaScript objct representing our ingredients at any point of time we want,
+ * for example to reset the current people burger!
  * @param {*} state
  * @param {*} action
  */
@@ -38,6 +44,23 @@ const reducer = (state = initialState, action) => {
           [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
         },
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+      };
+
+    case actionTypes.SET_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: {
+          salad: action.ingredients.salad,
+          bacon: action.ingredients.bacon,
+          cheese: action.ingredients.cheese,
+          meat: action.ingredients.meat,
+        },
+        error: false,
+      };
+    case actionTypes.FETCH_INGREDIENTS_FAILED:
+      return {
+        ...state,
+        error: true,
       };
     default:
       return state;
