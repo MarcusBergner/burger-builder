@@ -57,24 +57,10 @@ class BurgerBuilder extends Component {
    * this is the Place, where i set loading to true,
    *  and where i then place my order,
    *  and send it so the web!
-   *  passed as a querry parameter.
+   *  passed as a querry parameter maybe.
    */
   purchaseContinueHandler = () => {
-    const queryParams = [];
-
-    for (let i in this.state.ingredients) {
-      queryParams.push(
-        encodeURIComponent(i) +
-          "=" +
-          encodeURIComponent(this.state.ingredients[i])
-      );
-    }
-    queryParams.push("price=" + this.state.totalPrice);
-    const querySring = queryParams.join("&");
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + querySring,
-    });
+    this.props.history.push("/checkout");
   };
   render() {
     /**
