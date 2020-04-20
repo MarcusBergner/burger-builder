@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import * as burgerBuilderActions from "../../store/actions/index";
 import axios from "../../axios-orders";
 
-
 // stateful Component, because we add some state's
 class BurgerBuilder extends Component {
   //constructor --> old syntax for initizial state's
@@ -24,6 +23,7 @@ class BurgerBuilder extends Component {
   };
   componentDidMount() {
     console.log(this.props);
+    this.props.onInitIngredients();
   }
   updatePuchaseState(ingredients) {
     const sum = Object.keys(ingredients)
@@ -67,7 +67,7 @@ class BurgerBuilder extends Component {
 
     let orderSummary = null;
     let burger = null;
-    if (this.state.error) {
+    if (this.props.error) {
       burger = <p>Ingredients can not load</p>;
     } else {
       burger = <Spinner />;
@@ -113,6 +113,7 @@ const mapStateToProps = (state) => {
   return {
     ings: state.ingredients,
     price: state.totalPrice,
+    error: state.error,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -121,6 +122,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(burgerBuilderActions.addIngedient(ingName)),
     onIngredientRemoved: (ingName) =>
       dispatch(burgerBuilderActions.removeIngedient(ingName)),
+    onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients()),
   };
 };
 /**
