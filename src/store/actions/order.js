@@ -55,6 +55,9 @@ export const purchaseBurger = (orderData) => {
   };
 };
 
+/**
+ * action creator for String-Identifier: PURCHASE_INIT
+ */
 export const purchaseInit = () => {
   return {
     type: actionTypes.PURCHASE_INIT,

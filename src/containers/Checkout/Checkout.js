@@ -25,6 +25,10 @@ class Checkout extends Component {
   //   this.setState({ ingredients: ingredients, totalPrice: price });
   // };
 
+  // componentWillMount() {
+  //   this.props.onInitPurchase();
+  // }
+
   /**
    * goes back to the last page.
    * @returns (go to previews page)
@@ -86,5 +90,17 @@ const mapStateToProps = (state) => {
     purchased: state.order.purchased,
   };
 };
+
+// /**
+//  *
+//  * @param {*} dispatch
+//  * @returns a map as always, onInitPurchase
+//  * note: for working correct, mapDispatchToProps & mapStateToProps must to connect in the connect() funktion !
+//  */
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onInitPurchase: () => dispatch(actions.purchaseInit()),
+//   };
+// };
 
 export default connect(mapStateToProps)(Checkout);
