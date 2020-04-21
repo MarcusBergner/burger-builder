@@ -13,3 +13,16 @@ export const PURCHASE_BURGER_FAIL = "PURCHASE_BURGER_FAIL";
  * the action Type will be dipatched whenever we load the checkout page
  */
 export const PURCHASE_INIT = "PURCHASE_INIT";
+
+/**
+ * the action Type will be dipatched whenever we fetch starting the order page
+ */
+export const FETCH_ORDERS_START = "FETCH_ORDERS_START";
+/**
+ * the action Type will be dipatched whenever we fetch success the order page
+ */
+export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
+/**
+ * the action Type will be dipatched whenever we fail fetching the order
+ */
+export const FETCH_ORDERS_FAIL = "FETCH_ORDERS_FAIL";
