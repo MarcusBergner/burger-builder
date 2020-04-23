@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import classes from "./Auth.css";
+import * as actions from "../../store/actions/index";
+import { connect } from "react-redux";
+
 class Auth extends Component {
   state = {
     controls: {
@@ -85,6 +88,17 @@ class Auth extends Component {
   };
 
   /**
+   *@preventDefault to prevent the reloading of the page.
+   */
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.onAuth(
+      this.state.controls.email.value,
+      this.state.controls.password.value
+    );
+  };
+
+  /**
    * @formElementsArray  Converted the State-Object to an Array,
    * Then i can loop through all our controls and create a Auth-form-Object.
    * @form is a Array  for a dynamicaly set of inputs.
@@ -115,7 +129,7 @@ class Auth extends Component {
     ));
     return (
       <div className={classes.AuthData}>
-        <form>
+        <form onSubmit={this.submitHandler}>
           {form}
           <Button btnType="Success">SUBMIT</Button>
         </form>
@@ -123,5 +137,9 @@ class Auth extends Component {
     );
   }
 }
-
-export default Auth;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuth: (email, password) => dispatch(actions.auth(email, password)),
+  };
+};
+export default connect(null, mapDispatchToProps)(Auth);
