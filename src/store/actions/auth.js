@@ -22,6 +22,21 @@ export const authFail = (error) => {
     error: error,
   };
 };
+export const logout = () => {
+  return { type: actionTypes.AUTH_LOGOUT };
+};
+
+/**
+ * Check after whatever firebase returns, which will then ensure that the user is logged out!
+ * @param {*} expirationTime
+ */
+export const checkAuthTimeout = (expirationTime) => {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime + 1000);
+  };
+};
 
 export const auth = (email, password, isSignup) => {
   return (dispatch) => {
@@ -45,7 +60,9 @@ export const auth = (email, password, isSignup) => {
       .then((response) => {
         console.log(response);
         dispatch(authSuccess(response.data.idToken, response.data.localId));
+        dispatch(checkAuthTimeout(response.data.expiresIn));
       })
+      // Add some code to invalid that Token after one hour, so that then can also update our UI once the Token is no longer there!
       .catch((error) => {
         console.log(error);
         dispatch(authFail(error.response.data.error));
