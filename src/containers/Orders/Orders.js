@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Orders extends Component {
-  componentDidMount() {
+  componentWillMount() {
     // we need to make sure that we have the toke when we call that onFetchOrders()!!
     this.props.onFetchOrders(this.props.token);
   }
