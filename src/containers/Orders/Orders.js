@@ -7,8 +7,9 @@ import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Orders extends Component {
-  componentWillMount() {
-    this.props.onFetchOrders();
+  componentDidMount() {
+    // we need to make sure that we have the toke when we call that onFetchOrders()!!
+    this.props.onFetchOrders(this.props.token);
   }
   render() {
     let orders = <Spinner />;
@@ -32,6 +33,7 @@ const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
     loading: state.order.loading,
+    token: state.auth.token,
   };
 };
 
@@ -41,8 +43,8 @@ const mapStateToProps = (state) => {
  */
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchOrders: () => {
-      actions.fetchOrders();
+    onFetchOrders: (token) => {
+      dispatch(actions.fetchOrders(token));
     },
   };
 };
