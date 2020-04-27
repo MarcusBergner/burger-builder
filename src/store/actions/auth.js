@@ -8,10 +8,10 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (idToken, userId) => {
+export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    token: idToken,
+    idToken: token,
     userId: userId,
   };
 };
@@ -34,7 +34,7 @@ export const checkAuthTimeout = (expirationTime) => {
   return (dispatch) => {
     setTimeout(() => {
       dispatch(logout());
-    }, expirationTime + 1000);
+    }, expirationTime * 1000);
   };
 };
 

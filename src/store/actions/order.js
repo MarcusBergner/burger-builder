@@ -34,14 +34,14 @@ export const purchaseBurgerStart = () => {
  * This is a Asynchronous action creator.
  * This action we dispatched from the container once we click that order button.
  */
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
   return (dispatch) => {
     // the action returned by purchaseBurgerStart is dispatched to the store!
     dispatch(purchaseBurgerStart());
 
     // send the data to my backend, ".json" -> only a firebase spezial thing for correct work!
     axios
-      .post("/orders.json", orderData)
+      .post("/orders.json?auth=" + token, orderData)
       .then((response) => {
         console.log(response.data);
         dispatch(purchaseBurgerSuccess(response.data.name, orderData));
@@ -81,11 +81,11 @@ export const fetchOrdersStart = () => {
     type: actionTypes.FETCH_ORDERS_START,
   };
 };
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
   return (dispatch) => {
     dispatch(fetchOrdersStart());
     axios
-      .get("/orders.json")
+      .get("/orders.json?auth=" + token)
       .then((res) => {
         // change data format
         const fetchOrders = [];
