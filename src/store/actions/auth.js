@@ -22,6 +22,11 @@ export const authFail = (error) => {
     error: error,
   };
 };
+/**
+ * Function which remove the persistens User-Session-Auth-Object's from the Browser-Local Storage.
+ * Which contains the Date's if a user is authenticated!
+ * @returns actionTypes.AUTH_LOGOUT
+ */
 export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
@@ -64,9 +69,14 @@ export const auth = (email, password, isSignup) => {
       // success-case, inside then()
       .then((response) => {
         console.log(response);
+        /**
+         * @returns current Date plus the expiration time, response expires(in times *1000) because javaScript time works in milliseconds!
+         *@getTime() return the current time of the date now!
+         */
         const expirationDate = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
+        // for persistens the Auth-token for use in across sessions
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", response.data.localId);
@@ -92,21 +102,28 @@ export const setAuthRedirectPath = (path) => {
     path: path,
   };
 };
-
+/**
+ *i won't receive any arguments here but I will return a function here so that I can dispatch multiple actoions,
+ */
 export const authCheckState = () => {
   return (dispatch) => {
+    // get Token from local storage
     const token = localStorage.getItem("token");
     if (!token) {
       dispatch(logout());
     } else {
+      // get user expiration time from local storage
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       if (expirationDate <= new Date()) {
         dispatch(logout());
       } else {
         const userId = localStorage.getItem("userId");
         dispatch(authSuccess(token, userId));
+
+        // pass argument: amount of seconds until the user should be logged out!
         dispatch(
           checkAuthTimeout(
+            // passing difference between the future date and how many seconds these are and the current date in seconds, => expiry time in seconds!
             (expirationDate.getTime() - new Date().getTime()) / 1000
           )
         );

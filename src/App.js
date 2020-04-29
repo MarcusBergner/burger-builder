@@ -55,4 +55,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+// connect the action-container for use action-Types in this Component
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
