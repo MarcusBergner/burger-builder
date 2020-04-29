@@ -33,7 +33,12 @@ const authFail = (state, action) => {
 const authLogout = (state, action) => {
   return updateObject(state, { token: null, userId: null });
 };
-
+/**
+ *
+ * @param {*} state
+ * @param {*} action Action-Type -> "SET_AUTH_REDIRECT_PATH"
+ * @returns an updated state with updated object (property of my state slice) : authRedirectPath
+ */
 const setAuthRedirectPath = (state, action) => {
   return updateObject(state, { authRedirectPath: action.path });
 };

@@ -36,8 +36,21 @@ class BurgerBuilder extends Component {
     return sum > 0;
   }
 
+  /**
+   * this method is a redirect SetUp for the user,
+   * e.g. if the Button "SING UP TO ORDER" is clicked!
+   *
+   * @history is comming from react-router package
+   */
   purchaseHandler = () => {
-    this.setState({ purchasing: true });
+    if (this.props.isAuthenticated) {
+      // to make sure "this" inside of this method refers to the class and not to something else!
+      this.setState({ purchasing: true });
+    } else {
+      // use
+      this.props.onSetAuthRedirectPath("/checkout");
+      this.props.history.push("/auth");
+    }
   };
 
   purchaseCancelHandler = () => {
@@ -89,6 +102,7 @@ class BurgerBuilder extends Component {
             disabled={disableInfo}
             purchasable={this.updatePuchaseState(this.props.ings)}
             ordered={this.purchaseHandler}
+            isAuth={this.props.isAuthenticated}
             price={this.props.price}
           />
         </Auxiliary>
@@ -121,6 +135,7 @@ const mapStateToProps = (state) => {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
     error: state.burgerBuilder.error,
+    isAuthenticated: state.auth.token !== null,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -130,6 +145,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.removeIngedient(ingName)),
     onInitIngredients: () => dispatch(actions.initIngredients()),
     onInitPurchase: () => dispatch(actions.purchaseInit()),
+    onSetAuthRedirectPath: (path) =>
+      dispatch(actions.setAuthRedirectPath(path)),
   };
 };
 /**
