@@ -42,6 +42,9 @@ class Auth extends Component {
     isSignup: true,
   };
 
+  /**
+   * to make sure that actually reset the path if we reach this page while not building a burger!
+   */
   componentDidMount() {
     if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
       this.props.onSetAuthRedirectPath();
@@ -161,6 +164,7 @@ class Auth extends Component {
       errorMessage = <p>{this.props.error.message}</p>;
     }
     /**
+     * bind the State props in the redux-store and there are the actionTypes gives!
      *      * @authRedirect redirect to "/" after the user is succsessful login
      */
     let authRedirect = null;

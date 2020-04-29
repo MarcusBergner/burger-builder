@@ -43,5 +43,7 @@ export const AUTH_FAIL = "AUTH_FAIL";
  * the action Type will be dipatched when ever the User Authentification Log-Out
  */
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
-
+/**
+ * the action Type will be dipatched when ever setting the Authenticated Path
+ */
 export const SET_AUTH_REDIRECT_PATH = "SET_AUTH_REDIRECT_PATH";

@@ -37,8 +37,9 @@ class BurgerBuilder extends Component {
   }
 
   /**
-   * this method redirect the user, if the Button "SING UP TO ORDER" clicked!
-   * 
+   * this method is a redirect SetUp for the user,
+   * e.g. if the Button "SING UP TO ORDER" is clicked!
+   *
    * @history is comming from react-router package
    */
   purchaseHandler = () => {
@@ -47,11 +48,11 @@ class BurgerBuilder extends Component {
       this.setState({ purchasing: true });
     } else {
       // use
+      this.props.onSetAuthRedirectPath("/checkout");
       this.props.history.push("/auth");
     }
   };
 
-  
   purchaseCancelHandler = () => {
     // to make sure "this" inside of this method refers to the class and not to something else!
     this.setState({ purchasing: false });
@@ -144,6 +145,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.removeIngedient(ingName)),
     onInitIngredients: () => dispatch(actions.initIngredients()),
     onInitPurchase: () => dispatch(actions.purchaseInit()),
+    onSetAuthRedirectPath: (path) =>
+      dispatch(actions.setAuthRedirectPath(path)),
   };
 };
 /**
