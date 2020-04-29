@@ -36,10 +36,22 @@ class BurgerBuilder extends Component {
     return sum > 0;
   }
 
+  /**
+   * this method redirect the user, if the Button "SING UP TO ORDER" clicked!
+   * 
+   * @history is comming from react-router package
+   */
   purchaseHandler = () => {
-    this.setState({ purchasing: true });
+    if (this.props.isAuthenticated) {
+      // to make sure "this" inside of this method refers to the class and not to something else!
+      this.setState({ purchasing: true });
+    } else {
+      // use
+      this.props.history.push("/auth");
+    }
   };
 
+  
   purchaseCancelHandler = () => {
     // to make sure "this" inside of this method refers to the class and not to something else!
     this.setState({ purchasing: false });
@@ -89,6 +101,7 @@ class BurgerBuilder extends Component {
             disabled={disableInfo}
             purchasable={this.updatePuchaseState(this.props.ings)}
             ordered={this.purchaseHandler}
+            isAuth={this.props.isAuthenticated}
             price={this.props.price}
           />
         </Auxiliary>
@@ -121,6 +134,7 @@ const mapStateToProps = (state) => {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
     error: state.burgerBuilder.error,
+    isAuthenticated: state.auth.token !== null,
   };
 };
 const mapDispatchToProps = (dispatch) => {

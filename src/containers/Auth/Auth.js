@@ -160,6 +160,9 @@ class Auth extends Component {
     if (this.props.error) {
       errorMessage = <p>{this.props.error.message}</p>;
     }
+    /**
+     *      * @authRedirect redirect to "/" after the user is succsessful login
+     */
     let authRedirect = null;
     if (this.props.isAuthenticated) {
       authRedirect = <Redirect to={this.props.authRedirectPath} />;
