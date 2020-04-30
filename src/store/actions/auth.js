@@ -104,6 +104,7 @@ export const setAuthRedirectPath = (path) => {
 };
 /**
  *i won't receive any arguments here but I will return a function here so that I can dispatch multiple actoions,
+ @getTime gives us the corret difference in millisecond
  */
 export const authCheckState = () => {
   return (dispatch) => {

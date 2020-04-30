@@ -55,5 +55,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// connect the action-container for use action-Types in this Component
+//
+/**
+ * @connect the action-container for use action-Types in this Component
+ * @withRouter will enforce your props being passed down to your component still,
+ *  therefore react router is back on page know what's getting loaded!
+ */
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
