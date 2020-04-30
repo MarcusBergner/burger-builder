@@ -1,11 +1,11 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
-
 /**
  * This is a Synchronous action creator.
  * @param {*} id
  * @param {*} orderData
  */
+// ``` This is an Action Creator Component for the Order-Case's ```;
 export const purchaseBurgerSuccess = (id, orderData) => {
   return {
     type: actionTypes.PURCHASE_BURGER_SUCCESS,
@@ -81,9 +81,15 @@ export const fetchOrdersStart = () => {
     type: actionTypes.FETCH_ORDERS_START,
   };
 };
+/**
+ *
+ * @param {*} token
+ * @param {*} userId
+ */
 export const fetchOrders = (token, userId) => {
   return (dispatch) => {
     dispatch(fetchOrdersStart());
+    // ``` this set up is for FireBase queryParams```
     const queryParams =
       "?auth=" + token + '&orderBy="userId"&equalTo="' + userId + '"';
 

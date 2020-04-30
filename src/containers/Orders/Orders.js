@@ -9,7 +9,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 class Orders extends Component {
   componentWillMount() {
     // we need to make sure that we have the toke when we call that onFetchOrders()!!
-    this.props.onFetchOrders(this.props.token);
+    this.props.onFetchOrders(this.props.token, this.props.userId);
   }
   render() {
     let orders = <Spinner />;
@@ -34,17 +34,18 @@ const mapStateToProps = (state) => {
     orders: state.order.orders,
     loading: state.order.loading,
     token: state.auth.token,
+    userId: state.auth.userId,
   };
 };
 
 /**
  *  map my props to dispatchable functions
- * @param {*} dispatch
+ * @param {*} dispatch an action creator
  */
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchOrders: (token) => {
-      dispatch(actions.fetchOrders(token));
+    onFetchOrders: (token, userId) => {
+      dispatch(actions.fetchOrders(token, userId));
     },
   };
 };

@@ -117,11 +117,16 @@ class ContactData extends Component {
         formElementIdentifier
       ].value;
     }
+    // ``` NOTE: for Real-Project you need some way of passing that userId to the backend,
+    // or use that token you pass along anyways to only fetch data for a given user! ```;
+    //TODO[for Real-Project you need some way of passing that userId to the backend,
+    //TODO or use that token you pass along anyways to only fetch data for a given user!]
     // not a setup in real-world() --> prices should definitely calculate on the server-site, for no manipualte !
     const order = {
       ingredients: this.props.ings,
       price: this.props.price,
       orderData: formData,
+      userId: this.props.userId,
     };
     this.props.onOrderBurger(order, this.props.token);
   };
@@ -226,12 +231,14 @@ class ContactData extends Component {
     );
   }
 }
+// for send the state's to our 'firebase' backend
 const mapStateToProps = (state) => {
   return {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
     loading: state.order.loading,
     token: state.auth.token,
+    userId: state.auth.userId,
   };
 };
 /**
