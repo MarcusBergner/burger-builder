@@ -7,6 +7,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import * as actions from "../../../store/actions/index";
+import { updateObject } from "../../../shared/utility";
 
 // import { withRouter } from "react-router-dom";
 
@@ -117,11 +118,16 @@ class ContactData extends Component {
         formElementIdentifier
       ].value;
     }
+    // ``` NOTE: for Real-Project you need some way of passing that userId to the backend,
+    // or use that token you pass along anyways to only fetch data for a given user! ```;
+    //TODO[for Real-Project you need some way of passing that userId to the backend,
+    //TODO or use that token you pass along anyways to only fetch data for a given user!]
     // not a setup in real-world() --> prices should definitely calculate on the server-site, for no manipualte !
     const order = {
       ingredients: this.props.ings,
       price: this.props.price,
       orderData: formData,
+      userId: this.props.userId,
     };
     this.props.onOrderBurger(order, this.props.token);
   };
@@ -162,18 +168,20 @@ class ContactData extends Component {
    * Method checks User typed something or changed something
    */
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedOrderForm = {
-      ...this.state.orderForm,
-    };
-    const updatedFormElement = {
-      ...updatedOrderForm[inputIdentifier],
-    };
-    updatedFormElement.value = event.target.value;
-    updatedFormElement.valid = this.checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation
+    const updatedFormElement = updateObject(
+      this.state.orderForm[inputIdentifier],
+      {
+        value: event.target.value,
+        valid: this.checkValidity(
+          event.target.value,
+          this.state.orderForm[inputIdentifier].validation
+        ),
+        touched: true,
+      }
     );
-    updatedFormElement.touched = true;
+    const updatedOrderForm = updateObject(this.state.orderForm, {
+      [inputIdentifier]: updatedFormElement,
+    });
     updatedOrderForm[inputIdentifier] = updatedFormElement;
     let formIsValid = true;
     for (let inputIdentifier in updatedOrderForm) {
@@ -226,12 +234,14 @@ class ContactData extends Component {
     );
   }
 }
+// for send the state's to our 'firebase' backend
 const mapStateToProps = (state) => {
   return {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
     loading: state.order.loading,
     token: state.auth.token,
+    userId: state.auth.userId,
   };
 };
 /**
