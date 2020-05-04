@@ -24,7 +24,7 @@ describe("<NavigationItems />", () => {
   });
 });
 describe("<NavigationItems />", () => {
-  it("should render three <NavigationItems /> elements if is autnenticated", () => {
+  it("should an  exact logout button", () => {
     wrapper.setProps({ isAuthenticated: true });
 
     expect(
