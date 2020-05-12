@@ -1,0 +1,40 @@
+// don't need enzyme because we're not testing any react components, we don't need to render antything,
+// just test normal javascript code, we test functions, the reducer function.
+import reducer from "./auth";
+import * as actionTypes from "../actions/actionTypes";
+
+describe("auth reducer", () => {
+  it("should return the initial state", () => {
+    expect(reducer(undefined, {})).toEqual({
+      token: null,
+      userId: null,
+      error: null,
+      loading: false,
+      authRedirectPath: "/",
+    });
+  });
+  it("should store the token upon login", () => {
+    expect(
+      reducer(
+        {
+          token: null,
+          userId: null,
+          error: null,
+          loading: false,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.AUTH_SUCCESS,
+          idToken: "some-token",
+          userId: "some-user-Id",
+        }
+      )
+    ).toEqual({
+      token: "some-token",
+      userId: "some-user-Id",
+      error: null,
+      loading: false,
+      authRedirectPath: "/",
+    });
+  });
+});
