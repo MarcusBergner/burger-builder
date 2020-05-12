@@ -105,8 +105,11 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "wallaby": {
+    "autoDetect": true
+  },
   "devDependencies": {
-    "jest": "^20.0.4",
+    "jest": "^24.0.4",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
