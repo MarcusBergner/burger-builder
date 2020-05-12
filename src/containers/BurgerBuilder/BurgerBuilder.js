@@ -11,7 +11,8 @@ import * as actions from "../../store/actions/index";
 import axios from "../../axios-orders";
 
 // stateful Component, because we add some state's
-class BurgerBuilder extends Component {
+// for testing we need to get access to the component behind the container -> convenient trick "export this class"
+export class BurgerBuilder extends Component {
   //constructor --> old syntax for initizial state's
   // constructor (props){
   //     super(props);
