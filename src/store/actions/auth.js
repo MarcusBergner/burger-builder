@@ -68,7 +68,7 @@ export const auth = (email, password, isSignup) => {
       .post(url, authData)
       // success-case, inside then()
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         /**
          * @returns current Date plus the expiration time, response expires(in times *1000) because javaScript time works in milliseconds!
          *@getTime() return the current time of the date now!
@@ -85,7 +85,7 @@ export const auth = (email, password, isSignup) => {
       })
       // Add some code to invalid that Token after one hour, so that then can also update our UI once the Token is no longer there!
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         dispatch(authFail(error.response.data.error));
       });
   };

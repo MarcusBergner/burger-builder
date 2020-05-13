@@ -10,7 +10,7 @@ class OrderSummary extends Component {
   // }
   // this could be a funcional component, doesn't have to be a class
   componentDidUpdate() {
-    console.log("componentDidUpdate() -> [OrderSummary] Will-Update");
+    // console.log("componentDidUpdate() -> [OrderSummary] Will-Update");
   }
   render() {
     const ingredientSummary = Object.keys(this.props.ingredients).map(
