@@ -87,4 +87,56 @@ describe("auth reducer", () => {
       authRedirectPath: "/",
     });
   });
+
+  it("should return updateObject after authStart()", () => {
+    expect(
+      reducer(
+        {
+          token: null,
+          userId: null,
+          error: null,
+          loading: false,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.AUTH_START,
+          error: "some-error",
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      token: null,
+      userId: null,
+      error: null,
+      loading: true,
+      authRedirectPath: "/",
+    });
+  });
+  it("should return updateObject after setAuthRedirectPath()", () => {
+    expect(
+      reducer(
+        {
+          token: "some-token",
+          userId: "some-user-id",
+          error: null,
+          loading: true,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.SET_AUTH_REDIRECT_PATH,
+          path: "some-path",
+
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      error: null,
+      loading: true,
+      token: "some-token",
+      userId: "some-user-id",
+      authRedirectPath: "some-path",
+    });
+  });
 });
