@@ -37,4 +37,54 @@ describe("auth reducer", () => {
       authRedirectPath: "/",
     });
   });
+
+  it("should remove User-data after actionTypes.AUTH_LOGOUT is called", () => {
+    expect(
+      reducer(
+        {
+          token: null,
+          userId: null,
+          error: null,
+          loading: false,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.AUTH_LOGOUT,
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      token: null,
+      userId: null,
+      error: null,
+      loading: false,
+      authRedirectPath: "/",
+    });
+  });
+  it("should return updateObject after authFail()", () => {
+    expect(
+      reducer(
+        {
+          token: null,
+          userId: null,
+          error: null,
+          loading: false,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.AUTH_FAIL,
+          error: "some-error",
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      token: null,
+      userId: null,
+      error: "some-error",
+      loading: false,
+      authRedirectPath: "/",
+    });
+  });
 });
