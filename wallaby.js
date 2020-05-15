@@ -1,14 +1,14 @@
 var wallabyWebpack = require("wallaby-webpack");
-
-const React = require("react");
+const webpack = require("webpack");
 module.exports = function (wallaby) {
   var webpackPostprocessor = wallabyWebpack({
     // webpack options
-
-    externals: {
-      // Use external version of React
-      react: "React",
-    },
+    plugins: [
+      new webpack.NormalModuleReplacementPlugin(
+        /\.(gif|png|scss|css)$/,
+        "node-noop"
+      ),
+    ],
 
     module: {
       rules: [
