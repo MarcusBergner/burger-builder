@@ -1,8 +1,23 @@
 var wallabyWebpack = require("wallaby-webpack");
 
+const React = require("react");
 module.exports = function (wallaby) {
   var webpackPostprocessor = wallabyWebpack({
     // webpack options
+
+    externals: {
+      // Use external version of React
+      react: "React",
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.(scss|css)$/,
+          use: "null",
+        },
+      ],
+    },
     resolve: {
       extensions: [".js", ".jsx"],
     },
@@ -16,12 +31,12 @@ module.exports = function (wallaby) {
 
     tests: [{ pattern: "src/**/*test.js*", load: false }],
 
-    compilers: {
-      "**/*.js*": wallaby.compilers.babel(),
-    },
-
     env: { kind: "chrome" },
-
+    compilers: {
+      "**/*.js": wallaby.compilers.babel({
+        presets: ["react-app"],
+      }),
+    },
     postprocessor: webpackPostprocessor,
 
     setup: function () {
