@@ -1,5 +1,5 @@
 import React from "react";
-import { configure, shallow } from "enzyme";
+import { configure, shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import NavigationItems from "./NavigationItems";
 import NavigationItem from "./NavigationItem/NavigationItem";
@@ -16,9 +16,9 @@ beforeEach(() => {
 describe("<NavigationItems />", () => {
   it("should render two <NavigationItems /> elements if not autnenticated", () => {
     // whrite expection, at this case we want create an instance of this component as it would be renderer to the DOM
-    expect(wrapper.find(NavigationItem)).toHaveLength(2);
-  });
-});
+    expect(wrapper.find(NavigationItems));
+  }); /*?*/
+}); /*?*/
 describe("<NavigationItems />", () => {
   it("should render three <NavigationItems /> elements if is autnenticated", () => {
     // whrite expection
