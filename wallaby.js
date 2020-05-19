@@ -1,46 +1,46 @@
+var wallabyWebpack = require("wallaby-webpack");
+const webpack = require("webpack");
 module.exports = function (wallaby) {
-  // Babel, jest-cli and some other modules may be located under
-  // react-scripts/node_modules, so need to let node.js know about it
-  var path = require("path");
-  process.env.NODE_PATH +=
-    path.delimiter +
-    path.join(__dirname, "node_modules") +
-    path.delimiter +
-    path.join(__dirname, "node_modules/react-scripts/node_modules");
-  require("module").Module._initPaths();
+  var webpackPostprocessor = wallabyWebpack({
+    // webpack options
+    plugins: [
+      new webpack.NormalModuleReplacementPlugin(
+        /\.(gif|png|scss|css)$/,
+        "node-noop"
+      ),
+    ],
+
+    module: {
+      rules: [
+        {
+          test: /\.(scss|css)$/,
+          use: "null",
+        },
+      ],
+    },
+    resolve: {
+      extensions: [".js", ".jsx"],
+    },
+  });
 
   return {
     files: [
-      "jsconfig.json",
-      "src/**/*.+(js|jsx|json|snap|css|less|sass|scss|jpg|jpeg|gif|png|svg)",
-      "!src/**/*.test.js?(x)",
+      { pattern: "src/**/*.js*", load: false },
+      { pattern: "src/**/*test.js*", ignore: true },
     ],
 
-    tests: ["src/**/*.test.js?(x)"],
+    tests: [{ pattern: "src/**/*test.js*", load: false }],
 
-    env: {
-      type: "node",
-    },
-
+    env: { kind: "chrome" },
     compilers: {
-      "**/*.js?(x)": wallaby.compilers.babel({
+      "**/*.js": wallaby.compilers.babel({
         presets: ["react-app"],
       }),
     },
+    postprocessor: webpackPostprocessor,
 
-    setup: (wallaby) => {
-      const createJestConfigUtil = require("react-scripts/scripts/utils/createJestConfig");
-      const jestConfig = createJestConfigUtil((p) =>
-        require.resolve("react-scripts/" + p)
-      );
-      Object.keys(jestConfig.transform || {}).forEach(
-        (k) =>
-          ~k.indexOf("^.+\\.(js|jsx") && void delete jestConfig.transform[k]
-      );
-      delete jestConfig.testEnvironment;
-      wallaby.testFramework.configure(jestConfig);
+    setup: function () {
+      window.__moduleBundler.loadTests();
     },
-
-    testFramework: "jest",
   };
 };

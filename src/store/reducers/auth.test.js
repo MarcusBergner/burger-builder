@@ -37,4 +37,106 @@ describe("auth reducer", () => {
       authRedirectPath: "/",
     });
   });
+
+  it("should remove User-data after actionTypes.AUTH_LOGOUT is called", () => {
+    expect(
+      reducer(
+        {
+          token: null,
+          userId: null,
+          error: null,
+          loading: false,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.AUTH_LOGOUT,
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      token: null,
+      userId: null,
+      error: null,
+      loading: false,
+      authRedirectPath: "/",
+    });
+  });
+  it("should return updateObject after authFail()", () => {
+    expect(
+      reducer(
+        {
+          token: null,
+          userId: null,
+          error: null,
+          loading: false,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.AUTH_FAIL,
+          error: "some-error",
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      token: null,
+      userId: null,
+      error: "some-error",
+      loading: false,
+      authRedirectPath: "/",
+    });
+  });
+
+  it("should return updateObject after authStart()", () => {
+    expect(
+      reducer(
+        {
+          token: null,
+          userId: null,
+          error: null,
+          loading: false,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.AUTH_START,
+          error: "some-error",
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      token: null,
+      userId: null,
+      error: null,
+      loading: true,
+      authRedirectPath: "/",
+    });
+  });
+  it("should return updateObject after setAuthRedirectPath()", () => {
+    expect(
+      reducer(
+        {
+          token: "some-token",
+          userId: "some-user-id",
+          error: null,
+          loading: true,
+          authRedirectPath: "/",
+        },
+        {
+          type: actionTypes.SET_AUTH_REDIRECT_PATH,
+          path: "some-path",
+
+          token: "some-token",
+          userId: "some-user-id",
+        }
+      )
+    ).toEqual({
+      error: null,
+      loading: true,
+      token: "some-token",
+      userId: "some-user-id",
+      authRedirectPath: "some-path",
+    });
+  });
 });
