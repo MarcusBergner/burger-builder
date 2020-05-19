@@ -24,7 +24,8 @@ describe("<NavigationItems />", () => {
     // whrite expection
     // wrapper = shallow(<NavigationItems isAuthenticated />);
     wrapper.setProps({ isAuthenticated: true });
-    expect(wrapper.find(NavigationItem)).toHaveLength(3);
+    // expect( wrapper.find( NavigationItem ) ).toHaveLength( 3 );
+    expect(wrapper.find(NavigationItem).length).toEqual(3);
   });
 });
 describe("<NavigationItems />", () => {
