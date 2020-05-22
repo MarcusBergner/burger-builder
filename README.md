@@ -103,6 +103,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 - [Alternatives to Ejecting](#alternatives-to-ejecting)
 - [Something Missing?](#something-missing)
 - [React-Redux](#react-redux)
+- [Webpack](#webpack)
 
 ## Updating to New Releases
 
@@ -2829,3 +2830,37 @@ const reducer = createReducer(initialState, {
 This is clearly much shorter and easier to read. However, this only works correctly if you are using the "magic" createReducer function from Redux Toolkit that wraps this reducer in Immer's produce function. If this reducer is used without Immer, it will actually mutate the state!. It's also not obvious just by looking at the code that this function is actually safe and updates the state immutably. Please make sure you understand the concepts of immutable updates fully. If you do use this, it may help to add some comments to your code that explain your reducers are using Redux Toolkit and Immer.
 
 In addition, Redux Toolkit's createSlice utility will auto-generate action creators and action types based on the reducer functions you provide, with the same Immer-powered update capabilities inside.
+
+# Webpack
+
+Adding babel-polyfill
+The current setup won't support all browsers theoretically supported by React. Features like Promises and **Object.assign()** are missing in older browsers - especially in IE of course.
+
+If you need to support these browsers, you need to add a polyfill (a package which provides these features for older browsers).
+
+The Babel docs explain how you can take advantage of Babel's built-in "Polyfill auto injecting" feature: https://babeljs.io/docs/en/babel-polyfill
+
+Simply install two packages:
+
+`npm install --save core-js`
+
+and
+`npm install --save regenerator-runtime`
+
+Change the config of your **@babel/preset-env** babel preset in the **.babelrc** file:
+
+```
+    "presets": [
+      ["@babel/preset-env", {
+        "targets": {
+          "browsers": [
+            "> 1%",
+            "last 2 versions"
+          ]
+        },
+        "useBuiltIns": "usage"
+      }],
+      ...
+    ],
+
+```
