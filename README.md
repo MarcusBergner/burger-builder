@@ -2833,6 +2833,10 @@ In addition, Redux Toolkit's createSlice utility will auto-generate action creat
 
 # Webpack
 
+**Useful Resources & Links**
+1 [Webpack Docs:](https://webpack.js.org/concepts/)
+2 [More about Babel:](https://babeljs.io/)
+
 Adding babel-polyfill
 The current setup won't support all browsers theoretically supported by React. Features like Promises and **Object.assign()** are missing in older browsers - especially in IE of course.
 
