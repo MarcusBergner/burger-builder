@@ -12,7 +12,7 @@ describe("<BurgerBuilder />", () => {
   // to set my wrapper up
   beforeEach(() => {
     // i want to have an isolated unit test as you should use it as often as possible
-    //Notes: an arrow function with empty {}, for simply fulfill the requirement of passing a function!
+    // !Notes: an arrow function with empty {}, for simply fulfill the requirement of passing a function!
     wrapper = shallow(<BurgerBuilder onInitIngredients={() => {}} />); //?+
   }); /*?*/
   // write a test

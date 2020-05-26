@@ -43,14 +43,14 @@ class Auth extends Component {
   };
 
   /**
-   * to make sure that actually reset the path if we reach this page while not building a burger!
+   * ! to make sure that actually reset the path if we reach this page while not building a burger!
    */
   componentDidMount() {
     if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
       this.props.onSetAuthRedirectPath();
     }
   }
-
+  // ? Test this methods later??
   /**
    * Function that update the induvidual control,
    * which was changed.
