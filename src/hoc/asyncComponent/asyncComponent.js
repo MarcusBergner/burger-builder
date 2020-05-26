@@ -4,7 +4,7 @@ import React, { Component } from "react";
  * this function will use 'importComponent()' this dynamic import syntax.
  * for lazy loading components
  * @then  give us a promise where we eventually get the component we want to load.
- *
+ * ! Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function.
  * @param {*} importComponent
  */
 const asyncComponent = (importComponent) => {

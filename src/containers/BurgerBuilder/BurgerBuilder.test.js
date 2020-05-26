@@ -14,7 +14,7 @@ describe("<BurgerBuilder />", () => {
     // i want to have an isolated unit test as you should use it as often as possible
     // !Notes: an arrow function with empty {}, for simply fulfill the requirement of passing a function!
     wrapper = shallow(<BurgerBuilder onInitIngredients={() => {}} />); //?+
-  }); /*?*/
+  });
   // write a test
   it("should render < BuildControls /> when receiving ingredients ", () => {
     // after the component has been instantiated
@@ -23,7 +23,7 @@ describe("<BurgerBuilder />", () => {
     expect(wrapper.find(BuildControls).length).toEqual(1);
 
     // expect(wrapper.find(BuildControls)).toHaveLength(1);
-  }); /*?*/
+  });
   it("should render < BuildControls /> when receiving ingredients ", () => {
     // after the component has been instantiated
     wrapper.setProps({
