@@ -8,8 +8,10 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
 import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
 import orderReducer from "./store/reducers/order";
 import authReducer from "./store/reducers/auth";
+import authSaga from "./";
 
 /**
  * @compose allows us to compose our own set of enchancers and middleware
