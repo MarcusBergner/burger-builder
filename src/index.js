@@ -11,7 +11,7 @@ import thunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 import orderReducer from "./store/reducers/order";
 import authReducer from "./store/reducers/auth";
-import authSaga from "./";
+import { logoutSaga } from "./store/sagas/auth";
 
 /**
  * @compose allows us to compose our own set of enchancers and middleware
@@ -26,6 +26,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
+// create saga middleware function, to store results
+const sagaMiddleware = createSagaMiddleware();
+
 /**
  * connecting our store which is created by redux with our
  * react-app & the React-devtools!
@@ -34,8 +37,10 @@ const rootReducer = combineReducers({
  */
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
+
+sagaMiddleware.run(logoutSaga);
 /**
  * For activate Routing in app, use BrowserRouter and wrapped!
  * Spezial Import if use Provider.react-redux & BrowserRouter.react-router,
