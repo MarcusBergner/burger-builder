@@ -35,16 +35,23 @@ export const logout = () => {
     type: actionTypes.AUTH_INITIATE_LOGOUT,
   };
 };
+/**
+ * an action creator for logoutSaga
+ */
+export const logoutSucceed = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT,
+  };
+};
 
 /**
  * Check after whatever firebase returns, which will then ensure that the user is logged out!
  * @param {*} expirationTime
  */
 export const checkAuthTimeout = (expirationTime) => {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, expirationTime * 1000);
+  return {
+    type: actionTypes.AUTH_CHECK_TIMEOUT,
+    expirationTime: expirationTime,
   };
 };
 
