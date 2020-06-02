@@ -56,45 +56,51 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 export const auth = (email, password, isSignup) => {
-  return (dispatch) => {
-    dispatch(authStart());
-    const authData = {
-      email: email,
-      password: password,
-      returnSecureToken: true,
-    };
-    // set default url
-    let url =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDXfxqB8KKD2hdUxQgU-mrNbMpmXJNm8RI";
-    if (!isSignup) {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDXfxqB8KKD2hdUxQgU-mrNbMpmXJNm8RI";
-    }
+  //   return (dispatch) => {
+  //     dispatch(authStart());
+  //     const authData = {
+  //       email: email,
+  //       password: password,
+  //       returnSecureToken: true,
+  //     };
+  //     // set default url
+  //     let url =
+  //       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDXfxqB8KKD2hdUxQgU-mrNbMpmXJNm8RI";
+  //     if (!isSignup) {
+  //       url =
+  //         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDXfxqB8KKD2hdUxQgU-mrNbMpmXJNm8RI";
+  //     }
 
-    axios
-      .post(url, authData)
-      // success-case, inside then()
-      .then((response) => {
-        // console.log(response);
-        /**
-         * @returns current Date plus the expiration time, response expires(in times *1000) because javaScript time works in milliseconds!
-         *@getTime() return the current time of the date now!
-         */
-        const expirationDate = new Date(
-          new Date().getTime() + response.data.expiresIn * 1000
-        );
-        // for persistens the Auth-token for use in across sessions
-        localStorage.setItem("token", response.data.idToken);
-        localStorage.setItem("expirationDate", expirationDate);
-        localStorage.setItem("userId", response.data.localId);
-        dispatch(authSuccess(response.data.idToken, response.data.localId));
-        dispatch(checkAuthTimeout(response.data.expiresIn));
-      })
-      // Add some code to invalid that Token after one hour, so that then can also update our UI once the Token is no longer there!
-      .catch((error) => {
-        // console.log(error);
-        dispatch(authFail(error.response.data.error));
-      });
+  //     axios
+  //       .post(url, authData)
+  //       // success-case, inside then()
+  //       .then((response) => {
+  //         // console.log(response);
+  //         /**
+  //          * @returns current Date plus the expiration time, response expires(in times *1000) because javaScript time works in milliseconds!
+  //          *@getTime() return the current time of the date now!
+  //          */
+  //         const expirationDate = new Date(
+  //           new Date().getTime() + response.data.expiresIn * 1000
+  //         );
+  //         // for persistens the Auth-token for use in across sessions
+  //         localStorage.setItem("token", response.data.idToken);
+  //         localStorage.setItem("expirationDate", expirationDate);
+  //         localStorage.setItem("userId", response.data.localId);
+  //         dispatch(authSuccess(response.data.idToken, response.data.localId));
+  //         dispatch(checkAuthTimeout(response.data.expiresIn));
+  //       })
+  //       // Add some code to invalid that Token after one hour, so that then can also update our UI once the Token is no longer there!
+  //       .catch((error) => {
+  //         // console.log(error);
+  //         dispatch(authFail(error.response.data.error));
+  //       });
+  //   };
+  return {
+    type: actionTypes.AUTH_USER,
+    email: email,
+    password: password,
+    isSignup: isSignup,
   };
 };
 
