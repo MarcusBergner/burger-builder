@@ -38,6 +38,10 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS";
  * the action Type will be dipatched when ever the User Authentification fails
  */
 export const AUTH_FAIL = "AUTH_FAIL";
+/**
+ * the action Type will be dipatched when ever the logout detect is executed
+ */
+export const AUTH_INITIATE_LOGOUT = "AUTH_INITIATE_LOGOUT";
 
 /**
  * the action Type will be dipatched when ever the User Authentification Log-Out
