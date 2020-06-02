@@ -28,11 +28,11 @@ export const authFail = (error) => {
  * @returns actionTypes.AUTH_LOGOUT
  */
 export const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("expirationDate");
-  localStorage.removeItem("userId");
+  // localStorage.removeItem("token");
+  // localStorage.removeItem("expirationDate");
+  // localStorage.removeItem("userId");
   return {
-    type: actionTypes.AUTH_LOGOUT,
+    type: actionTypes.AUTH_INITIATE_LOGOUT,
   };
 };
 
@@ -103,7 +103,7 @@ export const setAuthRedirectPath = (path) => {
   };
 };
 /**
- *i won't receive any arguments here but I will return a function here so that I can dispatch multiple actoions,
+ *i won't receive any arguments here but I will return a function here so that I can dispatch multiple actions, for try to sign in !
  @getTime gives us the corret difference in millisecond
  */
 export const authCheckState = () => {
@@ -113,7 +113,7 @@ export const authCheckState = () => {
     if (!token) {
       dispatch(logout());
     } else {
-      // get user expiration time from local storage
+      // get user expiration time from the browser-local storage
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       if (expirationDate <= new Date()) {
         dispatch(logout());

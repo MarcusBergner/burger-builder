@@ -10,7 +10,7 @@ import Auth from "./Auth";
 configure({ adapter: new Adapter() });
 let wrapper;
 beforeEach(() => {
-  wrapper = shallow(<Auth />);
+  // wrapper = shallow(<Auth />);
 });
 describe("<Auth />", () => {
   it("should.....", () => {
