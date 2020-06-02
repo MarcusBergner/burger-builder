@@ -11,9 +11,9 @@ configure({ adapter: new Adapter() });
 let wrapper;
 beforeEach(() => {
   wrapper = shallow(<Auth />);
-}); /*?*/
+});
 describe("<Auth />", () => {
   it("should.....", () => {
     expect(wrapper);
   });
-}); /*?*/
+});

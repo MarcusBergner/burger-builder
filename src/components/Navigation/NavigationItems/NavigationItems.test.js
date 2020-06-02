@@ -16,7 +16,7 @@ beforeEach(() => {
 describe("<NavigationItems />", () => {
   it("should render two <NavigationItems /> elements if not autnenticated", () => {
     // whrite expection, at this case we want create an instance of this component as it would be renderer to the DOM
-    expect(wrapper.find(NavigationItems)); /*?*/
+    expect(wrapper.find(NavigationItems));
   });
 });
 describe("<NavigationItems />", () => {

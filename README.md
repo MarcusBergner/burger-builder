@@ -2868,3 +2868,12 @@ Change the config of your **@babel/preset-env** babel preset in the **.babelrc**
     ],
 
 ```
+
+# Animations in React Apps
+
+[More on CSS Transitions:](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions)
+[More on CSS Animations:](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+[More on ReactTransitionGroup:](https://github.com/reactjs/react-transition-group)
+[Alternative => React Motion:](https://github.com/chenglou/react-motion)
+[Alternative => React Move:](https://github.com/react-tools/react-move)
+[Animating Route Animations:](https://github.com/maisano/react-router-transition)
