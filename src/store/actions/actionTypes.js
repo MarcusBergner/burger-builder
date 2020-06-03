@@ -26,6 +26,10 @@ export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
  * the action Type will be dipatched whenever we fail fetching the order
  */
 export const FETCH_ORDERS_FAIL = "FETCH_ORDERS_FAIL";
+
+export const AUTH_CHECK_STATE = "AUTH_CHECK_STATE";
+
+export const AUTH_USER = "AUTH_USER";
 /**
  * the action Type will be dipatched when ever the User Authentification starts
  */
@@ -38,6 +42,7 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS";
  * the action Type will be dipatched when ever the User Authentification fails
  */
 export const AUTH_FAIL = "AUTH_FAIL";
+export const AUTH_CHECK_TIMEOUT = "AUTH_CHECK_TIMEOUT";
 /**
  * the action Type will be dipatched when ever the logout detect is executed
  */
