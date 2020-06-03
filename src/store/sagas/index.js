@@ -1,5 +1,6 @@
-// this is the root-setup-file for using saga
-import { takeEvery, all } from "redux-saga/effects";
+//! this is the root-setup-file for using saga: -> the goal is:
+//! one place you have all the side effects( of events ) and one place where you have all the actions( like events ) and don't mix that!
+import { takeEvery, all, takeLatest } from "redux-saga/effects";
 import {
   logoutSaga,
   checkAuthTimeoutSaga,
@@ -34,8 +35,9 @@ export function* watchAuth() {
 export function* watchBurgerBuilder() {
   yield takeEvery(actionTypes.INIT_INGREDIENTS, initIngredientsSaga);
 }
-
+//! note: takeLatest() -> will automatically cancel any ongoing executions of purchaseBurgerSaga and always only execute the latest one of them.
 export function* watchOrder() {
-  yield takeEvery(actionTypes.PURCHASE_BURGER, purchaseBurgerSaga);
+  yield takeLatest(actionTypes.PURCHASE_BURGER, purchaseBurgerSaga);
+  // yield takeEvery(actionTypes.PURCHASE_BURGER, purchaseBurgerSaga);
   yield takeEvery(actionTypes.FETCH_ORDERS, fetchOrdersSaga);
 }
