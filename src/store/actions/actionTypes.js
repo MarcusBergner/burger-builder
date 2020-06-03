@@ -6,6 +6,7 @@ export const REMOVE_INGEDRIENT = "REMOVE_INGEDRIENT";
 export const SET_INGREDIENTS = "SET_INGREDIENTS";
 export const INIT_INGREDIENTS = "INIT_INGREDIENTS";
 export const FETCH_INGREDIENTS_FAILED = "FETCH_INGREDIENTS_FAILED";
+export const PURCHASE_BURGER = "PURCHASE_BURGER";
 
 export const PURCHASE_BURGER_START = "PURCHASE_BURGER_START";
 export const PURCHASE_BURGER_SUCCESS = "PURCHASE_BURGER_SUCCESS";
@@ -19,6 +20,8 @@ export const PURCHASE_INIT = "PURCHASE_INIT";
  * the action Type will be dipatched whenever we fetch starting the order page
  */
 export const FETCH_ORDERS_START = "FETCH_ORDERS_START";
+export const FETCH_ORDERS = "FETCH_ORDERS";
+
 /**
  * the action Type will be dipatched whenever we fetch success the order page
  */
