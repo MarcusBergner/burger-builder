@@ -1,5 +1,5 @@
 import { delay } from "redux-saga/effects";
-import { put } from "redux-saga/effects";
+import { put, call } from "redux-saga/effects";
 import * as actions from "../actions/index";
 import axios from "axios";
 
@@ -7,12 +7,18 @@ import axios from "axios";
 // ! it's are next genartion javascript feature which are functions which can be executed incrementally.
 // ! you can kind of call them and they don't run from start to end immendiately but you can parse during function execution.
 // ! e.g. to wait dfor asynchronous code to finish, and that is exactly what redux-saga takes!
+//! Notes: for Testing Saga-generator-functions and make it testable you need to import "call" from "redux-saga/effects" and repla
 
 export function* logoutSaga(action) {
-  // ! Note: yield keyword -> marker this step to be execute, then it will wait for it to finish
-  yield localStorage.removeItem("token");
-  yield localStorage.removeItem("expirationDate");
-  yield localStorage.removeItem("userId");
+  // ! Note: yield keyword -> marker this step to be execute, then it will wait for it to finish.
+  //! Note: call() -> you can call some function on some object.
+  yield call([localStorage, "removeItem"], "token");
+  yield call([localStorage, "removeItem"], "expirationDate");
+  yield call([localStorage, "removeItem"], "userId");
+
+  // yield localStorage.removeItem("token");
+  // yield localStorage.removeItem("expirationDate");
+  // yield localStorage.removeItem("userId");
   yield put(
     // ? we should probably also use an action creator here and not instead of hard coding action-object here
     actions.logoutSucceed()
@@ -54,6 +60,7 @@ export function* authUserSaga(action) {
       new Date().getTime() + response.data.expiresIn * 1000
     );
     // for persistens the Auth-token for use in across sessions
+    //! Note: call() -> you can run multible tasks (actions) simultaneously (e.g. two axios requests)
     yield localStorage.setItem("token", response.data.idToken);
     yield localStorage.setItem("expirationDate", expirationDate);
     yield localStorage.setItem("userId", response.data.localId);
