@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
 });
 
-// create saga middleware function, to store results
+// ! note: create saga middleware function, to store results, for outsource all side-effects into sagas!
 const sagaMiddleware = createSagaMiddleware();
 
 /**
@@ -40,7 +40,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
 
-// ? setting up the watcher right at the start of our application
+// ! note: setting up the watcher right at the start of our application, for listen all the side-effects
 sagaMiddleware.run(watchAuth);
 /**
  * For activate Routing in app, use BrowserRouter and wrapped!

@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import axios from "axios";
+//! notes: this functions are action-creators that return actions like side-effect-events!
 
 // set up authenticatation related actions....
 export const authStart = () => {
@@ -120,28 +120,31 @@ export const setAuthRedirectPath = (path) => {
  @getTime gives us the corret difference in millisecond
  */
 export const authCheckState = () => {
-  return (dispatch) => {
-    // get Token from local storage
-    const token = localStorage.getItem("token");
-    if (!token) {
-      dispatch(logout());
-    } else {
-      // get user expiration time from the browser-local storage
-      const expirationDate = new Date(localStorage.getItem("expirationDate"));
-      if (expirationDate <= new Date()) {
-        dispatch(logout());
-      } else {
-        const userId = localStorage.getItem("userId");
-        dispatch(authSuccess(token, userId));
-
-        // pass argument: amount of seconds until the user should be logged out!
-        dispatch(
-          checkAuthTimeout(
-            // passing difference between the future date and how many seconds these are and the current date in seconds, => expiry time in seconds!
-            (expirationDate.getTime() - new Date().getTime()) / 1000
-          )
-        );
-      }
-    }
+  // return (dispatch) => {
+  //   // get Token from local storage
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     dispatch(logout());
+  //   } else {
+  //     // get user expiration time from the browser-local storage
+  //     const expirationDate = new Date(localStorage.getItem("expirationDate"));
+  //     if (expirationDate <= new Date()) {
+  //       dispatch(logout());
+  //     } else {
+  //       const userId = localStorage.getItem("userId");
+  //       dispatch(authSuccess(token, userId));
+  //       // pass argument: amount of seconds until the user should be logged out!
+  //       dispatch(
+  //         checkAuthTimeout(
+  //           // passing difference between the future date and how many seconds these are and the current date in seconds, => expiry time in seconds!
+  //           (expirationDate.getTime() - new Date().getTime()) / 1000
+  //         )
+  //       );
+  //     }
+  //   }
+  // };
+  return {
+    // thats should trigger my sagas/auth.authCheckSaga(), you need to enable it to do so! (with set up a listener in sagas/index.js)
+    type: actionTypes.AUTH_CHECK_STATE,
   };
 };

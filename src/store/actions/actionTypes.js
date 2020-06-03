@@ -26,6 +26,9 @@ export const FETCH_ORDERS_SUCCESS = "FETCH_ORDERS_SUCCESS";
  * the action Type will be dipatched whenever we fail fetching the order
  */
 export const FETCH_ORDERS_FAIL = "FETCH_ORDERS_FAIL";
+
+export const AUTH_CHECK_STATE = "AUTH_CHECK_STATE";
+
 export const AUTH_USER = "AUTH_USER";
 /**
  * the action Type will be dipatched when ever the User Authentification starts
