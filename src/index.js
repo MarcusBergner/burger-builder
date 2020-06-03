@@ -11,7 +11,7 @@ import thunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 import orderReducer from "./store/reducers/order";
 import authReducer from "./store/reducers/auth";
-import { watchAuth } from "./store/sagas/index";
+import { watchAuth, watchBurgerBuilder } from "./store/sagas/index";
 
 /**
  * @compose allows us to compose our own set of enchancers and middleware
@@ -42,6 +42,8 @@ const store = createStore(
 
 // ! note: setting up the watcher right at the start of our application, for listen all the side-effects
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchBurgerBuilder);
+
 /**
  * For activate Routing in app, use BrowserRouter and wrapped!
  * Spezial Import if use Provider.react-redux & BrowserRouter.react-router,

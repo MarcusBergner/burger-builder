@@ -4,6 +4,7 @@ export const REMOVE_INGEDRIENT = "REMOVE_INGEDRIENT";
  * the action Type is dipatched whenever this page is loaded.
  */
 export const SET_INGREDIENTS = "SET_INGREDIENTS";
+export const INIT_INGREDIENTS = "INIT_INGREDIENTS";
 export const FETCH_INGREDIENTS_FAILED = "FETCH_INGREDIENTS_FAILED";
 
 export const PURCHASE_BURGER_START = "PURCHASE_BURGER_START";
