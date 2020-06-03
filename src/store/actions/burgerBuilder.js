@@ -1,6 +1,5 @@
 // action creators for building a burger
 import * as actionTypes from "./actionTypes";
-import axios from "../../axios-orders";
 
 /**
  * following that pattern of naming my action creators just as the identifiers,
@@ -32,14 +31,17 @@ export const fetchIngredientsFailed = () => {
   };
 };
 export const initIngredients = () => {
-  return (dispatch) => {
-    axios
-      .get("https://react-my-burger-6c728.firebaseio.com/ingredients.json")
-      .then((response) => {
-        dispatch(setIngredients(response.data));
-      })
-      .catch((error) => {
-        dispatch(fetchIngredientsFailed());
-      });
+  // return (dispatch) => {
+  //   axios
+  //     .get("https://react-my-burger-6c728.firebaseio.com/ingredients.json")
+  //     .then((response) => {
+  //       dispatch(setIngredients(response.data));
+  //     })
+  //     .catch((error) => {
+  //       dispatch(fetchIngredientsFailed());
+  //     });
+  // };
+  return {
+    type: actionTypes.INIT_INGREDIENTS,
   };
 };

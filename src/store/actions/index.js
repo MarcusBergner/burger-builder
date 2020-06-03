@@ -2,8 +2,20 @@ export {
   addIngedient,
   removeIngedient,
   initIngredients,
+  setIngredients,
+  fetchIngredientsFailed,
 } from "./burgerBuilder";
-export { purchaseBurger, purchaseInit, fetchOrders } from "./order";
+export {
+  purchaseBurger,
+  purchaseInit,
+  fetchOrders,
+  fetchOrdersFail,
+  fetchOrdersSuccess,
+  fetchOrdersStart,
+  purchaseBurgerFail,
+  purchaseBurgerStart,
+  purchaseBurgerSuccess,
+} from "./order";
 export {
   auth,
   logout,
