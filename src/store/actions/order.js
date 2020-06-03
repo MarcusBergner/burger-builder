@@ -1,5 +1,4 @@
 import * as actionTypes from "./actionTypes";
-import axios from "../../axios-orders";
 /**
  * This is a Synchronous action creator.
  * @param {*} id

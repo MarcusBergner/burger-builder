@@ -82,6 +82,7 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true,
+          isEmail: true,
         },
         valid: false,
         touched: false,
@@ -150,7 +151,7 @@ class ContactData extends Component {
     const updatedOrderForm = updateObject(this.state.orderForm, {
       [inputIdentifier]: updatedFormElement,
     });
-    updatedOrderForm[inputIdentifier] = updatedFormElement;
+
     let formIsValid = true;
     for (let inputIdentifier in updatedOrderForm) {
       formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
