@@ -104,6 +104,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 - [Something Missing?](#something-missing)
 - [React-Redux](#react-redux)
 - [Webpack](#webpack)
+- [Redux-Saga](#redux-saga)
 
 ## Updating to New Releases
 
@@ -2877,3 +2878,14 @@ Change the config of your **@babel/preset-env** babel preset in the **.babelrc**
 [Alternative => React Motion:](https://github.com/chenglou/react-motion)
 [Alternative => React Move:](https://github.com/react-tools/react-move)
 [Animating Route Animations:](https://github.com/maisano/react-router-transition)
+
+# Redux-Saga
+Useful Resources & Links
+Find the module source code attached to this lecture.
+
+Useful Links:
+
+[Redux Saga: Full Documentation:](https://redux-saga.js.org/)
+[Advanced Concepts: ](https://redux-saga.js.org/docs/advanced/)
+[API Reference:](https://redux-saga.js.org/docs/api/)
+[Pros & Cons for Redux Saga vs Thunks:](https://stackoverflow.com/questions/34930735/pros-cons-of-using-redux-saga-with-es6-generators-vs-redux-thunk-with-es2017-asy/34933395)
