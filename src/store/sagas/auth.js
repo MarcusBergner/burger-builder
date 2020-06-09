@@ -33,7 +33,7 @@ export function* checkAuthTimeoutSaga(action) {
 }
 
 export function* authUserSaga(action) {
-  // to get this action this deipatches
+  // to get this action this dispatches
   yield put(actions.authStart());
 
   const authData = {
