@@ -36,6 +36,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
         axios.interceptors.request.eject(reqInterceptor);
         axios.interceptors.response.eject(resInterceptor);
       };
+      // this is the cleanUp-effect function, if [] as dependencies(i.e. the effect obly runs once) the cleanUp functions runs when the component gets unmounted!
+
       // that ensure if our interceptor change's we clean up
     }, [reqInterceptor, resInterceptor]);
 

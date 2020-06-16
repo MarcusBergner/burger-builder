@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "../Checkout/ContactData/ContactData";
 import { connect } from "react-redux";
-class Checkout extends Component {
+const checkout = (props) => {
   /**
    * Extract the query Parameters, bevor
    * @returns (Extracting Query-parameters)
@@ -33,7 +33,7 @@ class Checkout extends Component {
    * @returns (go to previews page)
    */
   checkoutCancelledHandler = () => {
-    this.props.history.goBack();
+    props.history.goBack();
   };
   /**
    * want to continue,
@@ -42,40 +42,37 @@ class Checkout extends Component {
    * @returns (contactData component)
    */
   checkoutContinuedHandler = () => {
-    this.props.history.replace("/checkout/contact-data");
+    props.history.replace("/checkout/contact-data");
   };
-  render() {
-    let summary = <Redirect to="/" />;
-    if (this.props.ings) {
-      const purchasedRedirect = this.props.purchased ? (
-        <Redirect to="/" />
-      ) : null;
-      summary = (
-        <div>
-          {purchasedRedirect}
-          <CheckoutSummary
-            ingredients={this.props.ings}
-            checkoutCancelled={this.checkoutCancelledHandler}
-            checkoutContinued={this.checkoutContinuedHandler}
-          />
-          <Route
-            path={this.props.match.path + "/contact-data"}
-            component={ContactData}
-            // this render-trick-method for loading contact data
-            // render={(props) => (
-            //   <ContactData
-            //     ingredients={this.props.ings}
-            //     price={this.state.totalPrice}
-            //     {...props}
-            //   />
-            // )}
-          />
-        </div>
-      );
-    }
-    return summary;
+
+  let summary = <Redirect to="/" />;
+  if (props.ings) {
+    const purchasedRedirect = props.purchased ? <Redirect to="/" /> : null;
+    summary = (
+      <div>
+        {purchasedRedirect}
+        <CheckoutSummary
+          ingredients={props.ings}
+          checkoutCancelled={checkoutCancelledHandler}
+          checkoutContinued={checkoutContinuedHandler}
+        />
+        <Route
+          path={props.match.path + "/contact-data"}
+          component={ContactData}
+          // this render-trick-method for loading contact data
+          // render={(props) => (
+          //   <ContactData
+          //     ingredients={this.props.ings}
+          //     price={this.state.totalPrice}
+          //     {...props}
+          //   />
+          // )}
+        />
+      </div>
+    );
   }
-}
+  return summary;
+};
 /**
  * @mapStateToProps has a function which gets the state.
  *  And in the end returns a javascript object where we map, our state stored in redux store
@@ -102,4 +99,4 @@ const mapStateToProps = (state) => {
 //   };
 // };
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps)(checkout);
