@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
  * Wehn using Routing: don't use <a></a> !
  * @activeClassName reference to classes.css
  */
-const navigationItem = props => (
+const navigationItem = (props) => (
   <li className={classes.NavigationItem}>
     <NavLink
       to={props.link}
